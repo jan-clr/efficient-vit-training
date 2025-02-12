@@ -486,7 +486,7 @@ def main(args):
         end_time_epoch=time.time()
 
         if args.output_dir:
-            checkpoint_paths = [output_dir / 'checkpoint.pth']
+            checkpoint_paths = [output_dir / f"epoch_{epoch}.pth"]
             for checkpoint_path in checkpoint_paths:
                 utils.save_on_master({
                     'model': model_without_ddp.state_dict(),
