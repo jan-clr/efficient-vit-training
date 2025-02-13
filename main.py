@@ -485,7 +485,7 @@ def main(args):
         lr_scheduler.step(epoch)
         end_time_epoch=time.time()
 
-        if args.output_dir:
+        if args.output_dir and (epoch < 40 or epoch % 10 == 0 or epoch == args.epochs - 1):
             checkpoint_paths = [output_dir / f"epoch_{epoch}.pth"]
             for checkpoint_path in checkpoint_paths:
                 utils.save_on_master({
