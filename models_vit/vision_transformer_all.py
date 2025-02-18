@@ -356,7 +356,7 @@ class VisionTransformer(nn.Module):
                  num_heads=12, mlp_ratio=4., qkv_bias=True, representation_size=None, distilled=False,
                  drop_rate=0., attn_drop_rate=0., drop_path_rate=0., embed_layer=PatchEmbed, norm_layer=None,
                  act_layer=None, weight_init='', post_norm = False, layerscale = False,
-                 ls_init=1e-5, localvit = False, localvit_act='hs+se'):
+                 ls_init=1e-5, localvit = False, localvit_act='hs+se', return_after_n_blocks=None):
         """
         Args:
             img_size (int, tuple): input image size
@@ -423,6 +423,8 @@ class VisionTransformer(nn.Module):
         if distilled:
             self.head_dist = nn.Linear(self.embed_dim, self.num_classes) if num_classes > 0 else nn.Identity()
 
+        self.return_after_n_blocks = return_after_n_blocks
+
         self.init_weights(weight_init)
 
     def init_weights(self, mode=''):
@@ -471,7 +473,14 @@ class VisionTransformer(nn.Module):
         else:
             x = torch.cat((cls_token, self.dist_token.expand(x.shape[0], -1, -1), x), dim=1)
         x = self.pos_drop(x + self.pos_embed)
-        x = self.blocks(x)
+        if self.return_after_n_blocks is not None:
+            for i, blk in enumerate(self.blocks):
+                x = blk(x)
+                if i == self.return_after_n_blocks:
+                    # only execute the first n blocks and return
+                    break
+        else:
+            x = self.blocks(x)
         if not self.post_norm:
             x = self.norm(x)
 
@@ -482,6 +491,8 @@ class VisionTransformer(nn.Module):
 
     def forward(self, x):
         x = self.forward_features(x)
+        if self.return_after_n_blocks is not None:
+            return x
         if self.head_dist is not None:
             x, x_dist = self.head(x[0]), self.head_dist(x[1])  # x must be a tuple
             if self.training and not torch.jit.is_scripting():
