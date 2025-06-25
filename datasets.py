@@ -74,6 +74,13 @@ def build_dataset(is_train, args, is_multisize=False):
         else:
             dataset = datasets.ImageFolder(root, transform=transform)
         nb_classes = 1000
+    elif args.data_set == 'TINYIMNET':
+        root = os.path.join(args.data_path, 'train' if is_train else 'val')
+        if is_multisize:
+            dataset = ImageFolder_multisize(root, transform=transform)
+        else:
+            dataset = datasets.ImageFolder(root, transform=transform)
+        nb_classes = 200
     elif args.data_set == 'INAT':
         dataset = INatDataset(args.data_path, train=is_train, year=2018,
                               category=args.inat_category, transform=transform)
