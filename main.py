@@ -194,6 +194,9 @@ def get_args_parser():
     parser.add_argument('--decrease-batch-size', action='store_true', help='if batch size decreases over time')
     parser.add_argument('--eval-on-final-size', action='store_true', help='do all the evaluations on final size')
 
+    # Custom
+    parser.add_argument('--cifar-aa', action='store_true', help='use CIFAR AutoAugment policy')
+
     return parser
 
 
@@ -485,7 +488,7 @@ def main(args):
         lr_scheduler.step(epoch)
         end_time_epoch=time.time()
 
-        if args.output_dir and (epoch < 40 or epoch % 10 == 0 or epoch == args.epochs - 1):
+        if args.output_dir and (epoch % 10 == 0 or epoch == args.epochs - 1):
             checkpoint_paths = [output_dir / f"epoch_{epoch}.pth"]
             for checkpoint_path in checkpoint_paths:
                 utils.save_on_master({

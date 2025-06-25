@@ -107,6 +107,10 @@ def build_transform(is_train, args):
             re_mode=args.remode,
             re_count=args.recount,
         )
+        if args.cifar_aa:
+            # replace AutoAugment with CIFAR10 policy
+            transform.transforms[2] = transforms.AutoAugment(
+                policy=transforms.AutoAugmentPolicy.CIFAR10)
         if not resize_im:
             # replace RandomResizedCropAndInterpolation with
             # RandomCrop
