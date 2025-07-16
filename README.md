@@ -1,4 +1,14 @@
-# Efficient VisionTransformer
+# Fork of Efficient VisionTransformer
+
+**This is a fork that is especially adapted for the GRAPHICS framework.**
+
+It adds the following features:
+- Saves the checkpoint after every 10 epochs without culling
+- Adds a `--cifar-aa` flag to use AutoAugment policies for CIFAR-10/100 datasets instead of the default RandAugment (for comparison with other models)
+
+To execute the custom CIFAR-10/100 training, use the `submit_cifar_training_job.sh` script.
+
+**Information below is credit to the original authors.**
 
 This repository contains implementation for the paper [Training a Vision Transformer from scratch in less than 24 hours with 1 GPU](https://arxiv.org/abs/2211.05187) published in [HiTY](https://hity-workshop.github.io/NeurIPS2022/) workshop at Neurips 2022.
 
