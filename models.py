@@ -16,6 +16,9 @@ from .models_vit.vision_transformer_all import VisionTransformer, _cfg
 from timm.models.registry import register_model
 from .models_vit.layers import trunc_normal_
 
+import warnings
+
+warnings.filterwarnings("ignore", category=UserWarning)
 
 __all__ = [
     'deit_tiny_patch16_224', 'deit_small_patch16_224', 'deit_base_patch16_224',
