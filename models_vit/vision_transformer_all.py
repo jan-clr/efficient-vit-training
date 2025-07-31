@@ -36,7 +36,6 @@ import math
 import logging
 from functools import partial
 from collections import OrderedDict
-from copy import deepcopy
 
 import torch
 import torch.nn as nn
@@ -44,7 +43,6 @@ import torch.nn.functional as F
 
 from timm.data import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD, IMAGENET_INCEPTION_MEAN, IMAGENET_INCEPTION_STD
 from .layers import PatchEmbed, Mlp, DropPath, trunc_normal_, lecun_normal_
-from timm.models.registry import register_model
 from .localvit import LocalityFeedForward
 
 _logger = logging.getLogger(__name__)

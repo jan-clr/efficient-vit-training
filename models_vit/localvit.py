@@ -12,8 +12,8 @@ import torch.nn as nn
 import math
 from functools import partial
 from timm.models.vision_transformer import VisionTransformer
-from timm.models.layers import DropPath
-from timm.models.registry import register_model
+from timm.layers import DropPath
+from timm.models import register_model
 
 
 class h_sigmoid(nn.Module):

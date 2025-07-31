@@ -13,9 +13,13 @@ from functools import partial
 
 from timm.data import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD, IMAGENET_INCEPTION_MEAN, IMAGENET_INCEPTION_STD
 from models_vit.vision_transformer_all import VisionTransformer, _cfg
-from timm.models.registry import register_model
+from timm.models import register_model
 from models_vit.layers import trunc_normal_
 
+import warnings
+
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=UserWarning)
 
 __all__ = [
     'deit_tiny_patch16_224', 'deit_small_patch16_224', 'deit_base_patch16_224',
