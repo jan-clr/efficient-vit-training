@@ -6,7 +6,7 @@ It adds the following features:
 - Saves the checkpoint after every 10 epochs without culling
 - Adds a `--cifar-aa` flag to use AutoAugment policies for CIFAR-10/100 datasets instead of the default RandAugment (for comparison with other models)
 
-To execute the custom CIFAR-10/100 training, use the `submit_cifar_training_job.sh` script.
+To execute the custom CIFAR-10/100 training, use the `submit_cifar_training_job.sh` script. Remember to adjust the parameters for directory paths and resources as needed (GPU configuration, output directory, virtual environment, etc.). The constants you need to adjust are marked in `<>` brackets, and include the output directory, the virtual environment and the data directory for `varsize_1gpu_best_cifar.sh` as well as your email address for SLURM notifications in the `submit_cifar_training.sh` script.
 
 **Information below is credit to the original authors.**
 

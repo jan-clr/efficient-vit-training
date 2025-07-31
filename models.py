@@ -13,7 +13,7 @@ from functools import partial
 
 from timm.data import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD, IMAGENET_INCEPTION_MEAN, IMAGENET_INCEPTION_STD
 from .models_vit.vision_transformer_all import VisionTransformer, _cfg
-from timm.models.registry import register_model
+from timm.models import register_model
 from .models_vit.layers import trunc_normal_
 
 import warnings
